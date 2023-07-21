@@ -1,3 +1,5 @@
+mod routes;
+
 use axum::{
     routing::get,
     Router,
@@ -5,6 +7,7 @@ use axum::{
 
 use tracing_subscriber;
 use tracing::{info, span, Level};
+use crate::routes::index::get_routes;
 
 #[tokio::main]
 async fn main() {
@@ -14,7 +17,7 @@ async fn main() {
         // .json()
         .init();
     // build our application with a single route
-    let app = Router::new().route("/", get(|| async { "Hello, World!" }));
+    let app = get_routes().await;
 
     info!("starting server on localhost:3000");
 
