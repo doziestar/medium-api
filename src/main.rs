@@ -1,7 +1,7 @@
 mod routes;
-pub mod controllers;
-pub mod services;
-pub mod dto;
+mod controllers;
+mod services;
+mod dto;
 
 use axum::{
     Server,
