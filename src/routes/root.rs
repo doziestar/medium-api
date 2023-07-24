@@ -1,10 +1,18 @@
-use axum::Json;
-use serde_json::json;
-use tracing::info;
+use axum::{Router};
 
-pub(crate) async fn root() -> Json<serde_json::Value> {
-    info!("I am ready to serve you");
-    Json(json!({
-        "message": "I am ready to serve you",
-    }))
+use log::{info};
+use axum::routing::get;
+use crate::controllers::root_controller::{root, root_with_path};
+
+
+pub(crate) fn route_root() -> Router {
+    let app = Router::new()
+        .route("/", get(|| async { "hello world" }))
+        .route("/ready", get(root))
+        .route("/ready/:name", get(root_with_path));
+    app
 }
+
+
+
+
